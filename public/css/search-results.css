@@ -18,7 +18,7 @@
     align-items: center;
 }
 
-#page-search-results header a spam {
+#page-search-results header a span {
     background-image: url('../imagens/icones/arrow-left.svg');
     display: flex;
     width: 20px;
@@ -71,13 +71,18 @@ main .card p {
     color: #6c6c80;
 }
 
+body {
+    background-color: white;
+}
+
 body::after {
     content: "";
-    position: fixed;
-    background: white;
-    top: 300px;
+    position: absolute;
+    background: #f0f0f5;
+    top: 0px;
     right: 0;
     left: 0;
     bottom: 0;
+    height: 16rem;
     z-index: -1;
 }

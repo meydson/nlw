@@ -1,47 +1,34 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link type="text/css" rel="stylesheet" href="css/main.css">
+{% extends "layout.html" %}
+{% set pageId = "page-search-results" %}
+{% block styles %}
     <link type="text/css" rel="stylesheet" href="css/search-results.css">
-    <link type="text/css" rel="stylesheet" href="css/responsive.css">
+{% endblock styles %}
+{% block title %}
     <title>Resultado da Pesquisa</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;700&family=Ubuntu:wght@700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div id="page-search-results">
-        
-            {% include "partials/page-header.html" %}
-            
-            <main>
-                <h4><strong>2 pontos</strong> encontrados</h4>
-                <div class="cards">
+{% endblock title %}
+{% block content %}
+    {% include "partials/page-header.html" %}        
+    <main>
+        {% if total > 0 %}
+            <h4><strong>{{total}} pontos</strong> encontrados</h4>
+            <div class="cards">
+                {% for place in places %}
                     <div class="card">
-                        <img src="https://images.unsplash.com/photo-1528323273322-d81458248d40?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1101&q=80" alt="Colectoria">
-                        <h1>Colectoria</h1>
-                        <h3>Resíduos Eletrônicos, lâmpadas</h3>
+                        <img src="{{ place.image }}" alt="{{ place.name }}">
+                        <h1>{{ place.name }}</h1>
+                        <h3>{{ place.items }}</h3>
                         <p>
-                            Rio do Sul, Santa Catarina <br/>
-                            Guilherme Gambala, Jardim América <br/>
-                            Número 260
+                            {{ place.city }}, {{ place.state }} <br/>
+                            {{ place.address }} <br/>
+                            {{ place.address2 }}
                         </p>
                     </div>
-                    <div class="card">
-                        <img src="https://images.unsplash.com/photo-1567393528677-d6adae7d4a0a?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1050&q=80" alt="Papperside">
-                        <h1>Papperside</h1>
-                        <h3>Papéis e papelão</h3>
-                        <p>
-                            Rio do Sul, Santa Catarina <br/>
-                            Guilherme Gambala, Jardim América <br/>
-                            Número 260
-                        </p>
-                    </div>
-                </div>
-
-            </main>
-            
-        
-    </div>
-</body>
-</html>
+                {% endfor %}
+            </div>
+        {%else%}
+            <h4><strong>Nenhum</strong> ponto encontrado</h4>
+        {% endif %}
+    </main>
+{% endblock content %}
